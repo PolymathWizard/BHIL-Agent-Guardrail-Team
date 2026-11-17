@@ -1,0 +1,52 @@
+site_name: BHIL Agent Guardrail Team
+site_description: Ten agents that clear projects, review code and keep BHIL's guardrails current. Human-directed. AI-enabled. Commercially tested.
+site_url: https://polymathwizard.github.io/BHIL-Agent-Guardrail-Team/
+repo_url: https://github.com/PolymathWizard/BHIL-Agent-Guardrail-Team
+repo_name: PolymathWizard/BHIL-Agent-Guardrail-Team
+copyright: Code MIT. Content CC BY 4.0. Barry Hurd Intelligence Lab.
+theme:
+  name: material
+  font:
+    text: IBM Plex Sans
+    code: IBM Plex Mono
+  palette:
+    scheme: default
+    primary: custom
+    accent: custom
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+extra_css:
+  - stylesheets/bhil.css
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+nav:
+  - Home: index.md
+  - Guide:
+      - Overview: 01-overview.md
+      - Workflows: 02-workflows.md
+      - Team rules: 03-team-rules.md
+      - Human decisions and the kill switch: 04-human-decisions-and-kill-switch.md
+      - Threat model: 05-threat-model.md
+      - Claude Code setup: 06-claude-code-setup.md
+      - Rollout: 07-rollout.md
+      - Figures: 08-figures.md
+      - Status and evidence: 09-status-and-evidence.md
+  - Reference:
+      - Roster: reference/roster.md
+      - Grant matrix: reference/grant-matrix.md
+      - Threat register: reference/threats.md
+  - Decisions:
+      - ADR-001 Canonical source: adr/ADR-001-canonical-source.md
+      - ADR-002 Read and act separation: adr/ADR-002-read-act-separation.md
+      - ADR-003 Claude Code runtime: adr/ADR-003-claude-code-runtime.md
+      - ADR-004 Reference control plane: adr/ADR-004-reference-control-plane.md
+exclude_docs: |
+  assets/figures/src/

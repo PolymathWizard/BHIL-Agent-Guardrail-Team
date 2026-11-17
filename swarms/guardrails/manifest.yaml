@@ -1,0 +1,36 @@
+# DERIVED FILE. Do not edit by hand. Source: data/team.json. Rebuild: python3 tools/build.py
+# swarms/guardrails/manifest.yaml
+swarm: guardrails
+ref: GUARDRAIL-001
+version: 0.1.0
+status: draft
+orchestrator: {"id": "conductor", "role": "orchestrator", "tools": ["agent.delegate", "run.state.write"]}
+agents:
+  - {"id": "intake", "tools": ["project.read"], "reads_untrusted": true}
+  - {"id": "threat-modeler", "tools": ["taxonomy.read", "taxonomy.propose", "web.search"], "reads_untrusted": true}
+  - {"id": "policy-steward", "tools": ["repo.read", "repo.branch", "pr.open"], "repo_paths": ["policies/", "schemas/", "templates/"]}
+  - {"id": "code-reviewer", "tools": ["repo.read", "pr.comment.draft"], "reads_untrusted": true}
+  - {"id": "supply-chain-auditor", "tools": ["repo.read", "advisory.lookup", "pin.propose"], "reads_untrusted": true}
+  - {"id": "privacy-guardian", "tools": ["project.read", "pii.detect"], "reads_untrusted": true}
+  - {"id": "red-team", "tools": ["code.run", "corpus.read", "corpus.propose"], "sandbox": "no-egress", "reads_untrusted": true}
+  - {"id": "verifier", "tools": ["repo.read", "trace.read", "evidence.read"], "context_isolation": true, "reads_untrusted": true}
+  - {"id": "sentinel", "tools": ["telemetry.read", "breaker.trip", "incident.open"]}
+edges:
+  - {"from": "conductor", "to": "*", "intents": ["task_assign"]}
+  - {"from": "*", "to": "conductor", "intents": ["task_result", "escalation"], "require": ["P1", "P3.envelope"]}
+  - {"from": "conductor", "to": "verifier", "intents": ["handoff"], "payload": "findings_by_reference"}
+  - {"from": "verifier", "to": "human", "intents": ["escalation"], "require": ["P4.rubric"]}
+  - {"from": "sentinel", "to": "human", "intents": ["escalation"]}
+limits: {"max_delegation_depth": 1, "max_fanout": 9, "max_instances_per_role": 1, "budget_usd": 25, "wallclock_min": 45, "grant_ttl_s": 900, "message_max_age_s": 120}
+defaults: {"tool_effect": "deny", "fail_mode": "closed"}
+hitl:
+  - {"id": "D1", "decision": "Clear a project", "owner": "engagement_lead", "second_approver_if": "risk_tier == high"}
+  - {"id": "D2", "decision": "Merge code", "owner": "repo_owner"}
+  - {"id": "D3", "decision": "Merge a policy bundle", "owner": "security_owner"}
+  - {"id": "D4", "decision": "Allowlist an MCP server or accept a changed tool definition", "owner": "security_owner"}
+  - {"id": "D5", "decision": "Resume after a pause or halt", "owner": "engagement_lead"}
+kill_switch:
+  pause_agent: ["sentinel", "human"]
+  halt_swarm: ["sentinel", "human"]
+  global_stop: ["human"]
+  resume: ["human"]

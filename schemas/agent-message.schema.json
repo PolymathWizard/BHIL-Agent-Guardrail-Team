@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/PolymathWizard/BHIL-Agent-Guardrail-Team/schemas/agent-message.schema.json",
+  "title": "Inter-agent message envelope",
+  "description": "Every message between agents on the Guardrails Team. The receiver runs six checks before any field reaches its context: signature, replay, schema, edge, taint, role tags.",
+  "type": "object",
+  "required": ["msg_id", "ts", "sender", "recipient", "swarm_run_id", "intent", "payload", "provenance", "nonce", "sig"],
+  "additionalProperties": false,
+  "properties": {
+    "msg_id": {"type": "string"},
+    "ts": {"type": "number", "description": "Unix seconds. Messages older than limits.message_max_age_s are rejected."},
+    "sender": {"type": "string", "description": "Agent id, for example code-reviewer."},
+    "recipient": {"type": "string"},
+    "swarm_run_id": {"type": "string"},
+    "engagement_id": {"type": "string"},
+    "intent": {"enum": ["task_assign", "task_result", "clarify", "handoff", "memory_proposal", "escalation"]},
+    "payload": {"type": "object"},
+    "payload_schema": {"type": "string", "format": "uri"},
+    "provenance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "trust_tier"],
+        "properties": {
+          "source": {"type": "string"},
+          "trust_tier": {"enum": ["T0_bhil_internal", "T1_client_provided", "T2_licensed_data", "T3_open_web", "T4_unknown"]},
+          "content_sha256": {"type": "string"}
+        }
+      }
+    },
+    "taint": {"type": "boolean", "description": "True when any free text came from untrusted material. Treated as true when absent."},
+    "delegation_ref": {"type": "string"},
+    "nonce": {"type": "string"},
+    "sig": {"type": "string", "description": "Signature over the canonical JSON of every other field, bound to the sender's identity."}
+  }
+}

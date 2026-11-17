@@ -1,0 +1,15 @@
+/* BHIL Brand Guidelines v1.0: paper, ink and a single blue. Square corners, hairlines. */
+:root {
+  --md-primary-fg-color: #0D1B2E;
+  --md-primary-fg-color--light: #1E3A5F;
+  --md-primary-fg-color--dark: #0A0A0A;
+  --md-accent-fg-color: #2E80B0;
+  --md-typeset-a-color: #2E80B0;
+}
+.md-typeset h1, .md-typeset h2 { font-weight: 500; color: #0A0A0A; }
+.md-typeset table:not([class]) { border-radius: 0; border: 0; border-top: 1px solid #0A0A0A; box-shadow: none; }
+.md-typeset table:not([class]) th { font-family: "IBM Plex Mono", monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: #2E80B0; background: none; }
+.md-typeset table:not([class]) td { border-top: 1px solid #D9D9D4; }
+.md-typeset img { border: 1px solid #D9D9D4; }
+.md-typeset .admonition, .md-typeset details { border-radius: 0; box-shadow: none; }
+.md-typeset code { border-radius: 0; }

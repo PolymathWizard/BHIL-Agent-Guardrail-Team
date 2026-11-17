@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/PolymathWizard/BHIL-Agent-Guardrail-Team/schemas/clearance-packet.schema.json",
+  "title": "Clearance packet",
+  "description": "What the Verifier hands the engagement lead. Raw evidence and open questions come first; the recommendation comes last. The decision field is filled by a person, never by an agent.",
+  "type": "object",
+  "required": ["packet_id", "engagement_id", "risk_tier", "checked", "not_checked", "findings", "open_questions", "recommendation"],
+  "additionalProperties": false,
+  "properties": {
+    "packet_id": {"type": "string"},
+    "engagement_id": {"type": "string"},
+    "swarm_run_id": {"type": "string"},
+    "risk_tier": {"enum": ["low", "standard", "high"]},
+    "checked": {"type": "array", "items": {"type": "string"}, "description": "What the team examined."},
+    "not_checked": {"type": "array", "items": {"type": "string"}, "description": "What the team could not examine. An empty list must be justified in open_questions."},
+    "findings": {"type": "array", "items": {"$ref": "finding.schema.json"}},
+    "disagreements": {"type": "array", "items": {"type": "string"}},
+    "open_questions": {"type": "array", "items": {"type": "string"}},
+    "recommendation": {"enum": ["clear", "clear_with_conditions", "block"]},
+    "conditions": {"type": "array", "items": {"type": "string"}, "description": "Each condition is a testable statement."},
+    "decision": {
+      "type": "object",
+      "description": "Filled by a person.",
+      "properties": {
+        "outcome": {"enum": ["clear", "clear_with_conditions", "block"]},
+        "decided_by": {"type": "string"},
+        "second_approver": {"type": "string"},
+        "decided_at": {"type": "string"}
+      }
+    }
+  }
+}

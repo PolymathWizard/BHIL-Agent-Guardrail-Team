@@ -1,0 +1,8 @@
+# The security owner reviews everything that defines or enforces the team.
+/data/              @PolymathWizard
+/schemas/           @PolymathWizard
+/policies/          @PolymathWizard
+/swarms/            @PolymathWizard
+/tools/             @PolymathWizard
+/.claude/           @PolymathWizard
+/.github/           @PolymathWizard

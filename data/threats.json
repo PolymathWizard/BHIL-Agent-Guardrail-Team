@@ -1,0 +1,33 @@
+{
+  "ref": "GUARDRAIL-001",
+  "mapping_tier": "UNCORROBORATED",
+  "mapping_note": "Framework keys and CVE references were taken from the BHIL playbook research run of 2026-11-17 and have not been re-checked against primary sources in this repository. Re-verify before citing them in client material.",
+  "pillars": {
+    "P1": "Input filters",
+    "P2": "PII redaction",
+    "P3": "Prompt injection defense",
+    "P4": "Output validation",
+    "P5": "Topic limits",
+    "P6": "Tool permissions",
+    "P7": "Human approval",
+    "P8": "Monitoring"
+  },
+  "threats": [
+    {"id": "BHIL-T01", "name": "Direct injection or jailbreak", "owasp": ["LLM01", "ASI01"], "atlas": ["AML.T0051.000", "AML.T0054"], "evidence": "", "pillars": ["P1", "P3"], "owners": ["code-reviewer", "red-team"]},
+    {"id": "BHIL-T02", "name": "Indirect injection through web pages, documents, email or tool output", "owasp": ["LLM01", "ASI01"], "atlas": ["AML.T0051.001", "AML.T0053"], "evidence": "CVE-2025-32711", "pillars": ["P3", "P1", "P6"], "owners": ["code-reviewer", "red-team"]},
+    {"id": "BHIL-T03", "name": "Agent-to-agent injection or spoofing", "owasp": ["ASI07", "ASI01"], "atlas": ["AML.T0051.001"], "evidence": "OWASP multi-agent threat modelling guide", "pillars": ["P3", "P6", "P8"], "owners": ["threat-modeler", "red-team", "sentinel"]},
+    {"id": "BHIL-T04", "name": "Memory or shared-context poisoning", "owasp": ["ASI06", "LLM09"], "atlas": ["AML.T0080.000", "AML.T0080.001", "AML.T0070"], "evidence": "", "pillars": ["P3", "P4", "P8"], "owners": ["threat-modeler", "red-team"]},
+    {"id": "BHIL-T05", "name": "Tool poisoning or tool-definition swap after approval", "owasp": ["ASI04", "LLM04"], "atlas": ["AML.T0110", "AML.T0104"], "evidence": "CVE-2025-54136", "pillars": ["P6", "P3"], "owners": ["supply-chain-auditor", "sentinel"]},
+    {"id": "BHIL-T06", "name": "Malicious or vulnerable MCP server or client", "owasp": ["ASI04", "ASI05"], "atlas": ["AML.T0010"], "evidence": "CVE-2025-6514, CVE-2025-49596", "pillars": ["P6"], "owners": ["supply-chain-auditor"]},
+    {"id": "BHIL-T07", "name": "Excessive agency or confused deputy in delegation", "owasp": ["LLM03", "ASI03", "ASI02"], "atlas": ["AML.T0053"], "evidence": "", "pillars": ["P6", "P7"], "owners": ["threat-modeler", "policy-steward"]},
+    {"id": "BHIL-T08", "name": "Unexpected code execution", "owasp": ["ASI05", "LLM10"], "atlas": ["AML.T0053"], "evidence": "CVE-2025-53773", "pillars": ["P6", "P4"], "owners": ["code-reviewer"]},
+    {"id": "BHIL-T09", "name": "Sensitive or client-confidential disclosure", "owasp": ["LLM02", "LLM08"], "atlas": ["AML.T0086", "AML.T0056"], "evidence": "", "pillars": ["P2", "P4"], "owners": ["privacy-guardian"]},
+    {"id": "BHIL-T10", "name": "Ungrounded intelligence", "owasp": ["LLM07"], "atlas": [], "evidence": "", "pillars": ["P4"], "owners": ["verifier"]},
+    {"id": "BHIL-T11", "name": "Cascading swarm failure", "owasp": ["ASI08", "LLM06"], "atlas": [], "evidence": "", "pillars": ["P8", "P7", "P6"], "owners": ["sentinel"]},
+    {"id": "BHIL-T12", "name": "Human-agent trust exploitation", "owasp": ["ASI09"], "atlas": [], "evidence": "", "pillars": ["P7"], "owners": ["verifier", "sentinel"]},
+    {"id": "BHIL-T13", "name": "Rogue or drifting agent", "owasp": ["ASI10"], "atlas": ["AML.T0081", "AML.T0103"], "evidence": "", "pillars": ["P8", "P6"], "owners": ["sentinel"]},
+    {"id": "BHIL-T14", "name": "Off-scope engagement", "owasp": ["LLM03", "LLM07"], "atlas": [], "evidence": "", "pillars": ["P5"], "owners": ["intake"]},
+    {"id": "BHIL-T15", "name": "Denial of wallet", "owasp": ["LLM06"], "atlas": [], "evidence": "", "pillars": ["P8", "P6"], "owners": ["conductor", "sentinel"]},
+    {"id": "BHIL-T16", "name": "AI service API used as a covert command channel", "owasp": ["ASI10"], "atlas": ["AML.T0096"], "evidence": "", "pillars": ["P8"], "owners": ["sentinel"]}
+  ]
+}

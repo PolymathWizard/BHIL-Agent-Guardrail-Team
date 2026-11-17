@@ -1,0 +1,32 @@
+# Engagement scope manifest. Copy to engagements/<ENG-ID>/scope.yaml (that folder is ignored by git).
+# Intake drafts this file; the engagement lead confirms it before any other agent runs.
+engagement_id: ENG-0000-000
+engagement_lead: ""
+second_approver: ""          # required when risk_tier is high
+risk_tier: standard          # low | standard | high
+risk_tier_reasons: []
+
+allowed_topics:
+  - id: example_topic
+    exemplars: ["An example request that is in scope"]
+
+# The first three denied topics are required in every engagement.
+denied_topics:
+  - id: individual_surveillance
+    exemplars: ["Find the home address of a named person"]
+  - id: non_public_access
+    exemplars: ["Log into a third-party portal with these credentials"]
+  - id: other_client_matters
+    exemplars: ["What did we find for other clients in this sector?"]
+
+data_sources:
+  - name: ""
+    trust_tier: T3_open_web  # T0_bhil_internal | T1_client_provided | T2_licensed_data | T3_open_web | T4_unknown
+    contains_personal_data: false
+    contains_client_confidential: false
+
+tools_requested:
+  - tool: ""
+    side_effect_class: read_only   # read_only | mutating_internal | external_communication | spend | destructive
+
+open_questions: []

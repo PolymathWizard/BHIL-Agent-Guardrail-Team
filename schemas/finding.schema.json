@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/PolymathWizard/BHIL-Agent-Guardrail-Team/schemas/finding.schema.json",
+  "title": "Finding",
+  "description": "One finding from a specialist. No evidence pointer, no finding. A specialist with nothing to report returns an empty list plus a coverage statement; it never reports clean.",
+  "type": "object",
+  "required": ["finding_id", "produced_by", "threat_id", "severity", "claim", "evidence", "evidence_tier"],
+  "additionalProperties": false,
+  "properties": {
+    "finding_id": {"type": "string"},
+    "produced_by": {"type": "string"},
+    "threat_id": {"type": "string", "pattern": "^BHIL-T[0-9]{2}$"},
+    "severity": {"enum": ["low", "medium", "high", "critical"]},
+    "claim": {"type": "string"},
+    "suggested_fix": {"type": "string"},
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["kind", "pointer"],
+        "properties": {
+          "kind": {"enum": ["file_line", "source_hash", "trace_id", "corpus_case"]},
+          "pointer": {"type": "string"},
+          "quote": {"type": "string"}
+        }
+      }
+    },
+    "evidence_tier": {"enum": ["VERIFIED", "CORROBORATED", "STATED", "UNCORROBORATED", "INFERENCE"]},
+    "verifier_status": {"enum": ["reproduced", "not_reproduced", "cannot_check"]}
+  }
+}

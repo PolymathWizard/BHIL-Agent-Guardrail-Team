@@ -1,0 +1,25 @@
+name: quality-gate
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Dash gate (raw bytes)
+        run: python3 tools/dash_gate.py
+      - name: Team invariants
+        run: python3 tools/validate.py
+      - name: Byte-compile tools
+        run: python3 -m compileall -q tools
+      - name: Self-test
+        run: python3 tools/selftest.py
+      - name: Envelope demo runs
+        run: python3 tools/envelope_check.py --demo
