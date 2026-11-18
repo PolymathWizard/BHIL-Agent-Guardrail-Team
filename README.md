@@ -4,7 +4,9 @@
 
 Ten agents that run BHIL's guardrails as one team. They clear projects as safe to run, review code before a person merges it, and keep the guardrails structure current. No agent on the team can clear, merge or resume; those three decisions belong to people.
 
-![One conductor, nine specialists, and a person at every exit](docs/assets/figures/png/SG01_team-map.png)
+![Animated overview: the problem, the team, read and act separation, six message checks, three jobs, human decisions and the kill switch](docs/assets/promo/guardrail-team-promo.gif)
+
+*A 27-second cut of the promo film. The animation shows the design rules; it is not a recording of a running system.*
 
 ## Why this exists
 
@@ -21,6 +23,8 @@ This repository is that structure for a ten-agent team, written down once and ge
 5. Stopping is done by revoking grants, never by asking an agent to stop.
 
 ## The ten agents
+
+![One conductor, nine specialists, and a person at every exit](docs/assets/figures/png/SG01_team-map.png)
 
 | # | Agent | Job | Hard limit |
 | --- | --- | --- | --- |

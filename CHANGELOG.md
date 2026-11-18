@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- README opens with an animated overview (`docs/assets/promo/guardrail-team-promo.gif`); the team map moves to the ten agents section
+
 ## 0.1.0 (2026-11-17) DRAFT
 
 First release. REF GUARDRAIL-001.

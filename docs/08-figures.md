@@ -30,6 +30,10 @@ Ten support graphics explain the team: process concepts, agent capabilities and 
 - Stone `#6B6258` for untrusted material and captions
 - Newsreader for the title (the finding) and the italic dek; IBM Plex Sans for labels; IBM Plex Mono for the eyebrow, codes and source line
 
+## Animated overview
+
+`docs/assets/promo/guardrail-team-promo.gif` is a 27-second cut of the promo film: 1280 by 720 pixels, 249 frames. It opens the README. It is schematic, like the figures, and was rendered outside this repository; it is not generated from `data/team.json`. An agent rename means re-rendering it.
+
 ## Regenerating
 
 The figure generator is the one script in this repository that is not stdlib-only. It needs the three fonts from npm, Python Playwright and Chrome. It is a development tool and no gate depends on it.
